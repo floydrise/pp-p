@@ -1,13 +1,5 @@
 #include <iostream>
-
-double to_meters(const double digit, const std::string &unit) {
-    double ret_val = 0;
-    if (unit == "m") return digit;
-    if (unit == "cm") ret_val = digit / 100;
-    if (unit == "in") ret_val = digit / 39.37;
-    if (unit == "ft") ret_val = digit / 3.281;
-    return ret_val;
-}
+#include "drill.h"
 
 int main() {
     bool terminate = false;
