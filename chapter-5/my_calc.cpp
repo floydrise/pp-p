@@ -20,12 +20,12 @@
 class Token {
 public:
     char kind;
-    int value;
+    double value;
 
     Token(char kind): kind(kind), value(0) {
     };
 
-    Token(char kind, int value): kind(kind), value(value) {
+    Token(char kind, double value): kind(kind), value(value) {
     };
 };
 
@@ -37,7 +37,7 @@ public:
 
 private:
     bool full = false;
-    Token buffer;
+    Token buffer = {'0'};
 };
 
 void Token_stream::putback(Token t) {
@@ -47,8 +47,48 @@ void Token_stream::putback(Token t) {
     full = true;
 }
 
+Token Token_stream::get() {
+    if (full) {
+        full = false;
+        return buffer;
+    }
+    char ch = 0;
+    if (!(std::cin >> ch)) {
+        throw std::runtime_error("No input");
+    }
+    switch (ch) {
+        case ';':
+        case 'q':
+        case '(':
+        case ')':
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            return Token{ch};
+        case '.':
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9': {
+            std::cin.putback(ch);
+            double val = 0;
+            std::cin >> val;
+            return Token{'8', val};
+        }
+        default:
+            throw std::runtime_error("Bad token");
+    }
+}
 
-Token get_token() // read a token from cin
+
+/*Token get_token() // read a token from cin
 {
     char ch;
     std::cin >> ch; // note that >> skips whitespace (space, newline, tab, etc.)
@@ -82,13 +122,11 @@ Token get_token() // read a token from cin
         default:
             std::cerr << "Bad token";
     }
-}
+}*/
 
 Token_stream ts;
 
 double expression();
-
-double term();
 
 double primary() {
     Token t = ts.get();
@@ -103,48 +141,6 @@ double primary() {
         }
         default:
             std::cerr << "Primary expected";
-    }
-}
-
-int main() {
-    try {
-        double val = 0;
-        while (std::cin) {
-            Token t = ts.get();
-            if (t.kind == 'q')
-                break;
-            if (t.kind == ';')
-                std::cout << val << std::endl;
-            else
-                ts.putback(t);
-            val = expression();
-        }
-    } catch (std::exception &e) {
-        std::cerr << e.what() << std::endl;
-        return 1;
-    }
-    catch (...) {
-        std::cerr << "Exception" << std::endl;
-        return 2;
-    }
-};
-
-double expression() {
-    double left = term();
-    Token t = ts.get();
-    while (true) {
-        switch (t.kind) {
-            case '+':
-                left += term();
-                t = ts.get();
-                break;
-            case '-':
-                left -= term();
-                t = ts.get();
-                break;
-            default:
-                return left;
-        }
     }
 }
 
@@ -165,7 +161,51 @@ double term() {
                 break;
             }
             default:
+                ts.putback(t);
                 return left;
         }
     }
+}
+
+double expression() {
+    double left = term();
+    Token t = ts.get();
+    while (true) {
+        switch (t.kind) {
+            case '+':
+                left += term();
+                t = ts.get();
+                break;
+            case '-':
+                left -= term();
+                t = ts.get();
+                break;
+            default:
+                ts.putback(t);
+                return left;
+        }
+    }
+}
+
+int main()
+try {
+    double val = 0;
+    std::cout << "Enter an expression and ';' to print or 'q' to exit: ";
+    while (std::cin) {
+        Token t = ts.get();
+        if (t.kind == 'q')
+            break;
+        if (t.kind == ';')
+            std::cout << val << std::endl;
+        else
+            ts.putback(t);
+        val = expression();
+    }
+} catch (std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return 1;
+}
+catch (...) {
+    std::cerr << "Exception" << std::endl;
+    return 2;
 }
