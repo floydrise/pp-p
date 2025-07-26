@@ -65,6 +65,7 @@ Token Token_stream::get() {
         case '-':
         case '*':
         case '/':
+        case '!':
             return Token{ch};
         case '.':
         case '0':
@@ -128,20 +129,41 @@ Token_stream ts;
 
 double expression();
 
+int factorial(int num) {
+    if (num == 0) return 1;
+    int res = 1;
+    for (int i = num; i >= 1; --i) {
+        res *= i;
+    }
+    return res;
+}
+
 double primary() {
     Token t = ts.get();
+    double val = 0;
     switch (t.kind) {
         case '8':
-            return t.value;
+            val = t.value;
+            break;
         case '(': {
-            double expr = expression();
+            val = expression();
             t = ts.get();
             if (t.kind != ')') std::cerr << "')' expected";
-            return expr;
+            break;
         }
         default:
             std::cerr << "Primary expected";
+            val = 0;
     }
+    t = ts.get();
+    while (t.kind == '!') {
+        int n = static_cast<int>(val);
+        if (n < 0 || n != val) throw std::runtime_error("Can't get factorial of value");
+        val = factorial(n);
+        t = ts.get();
+    }
+    ts.putback(t);
+    return val;
 }
 
 double term() {
@@ -149,10 +171,11 @@ double term() {
     Token t = ts.get();
     while (true) {
         switch (t.kind) {
-            case '*':
+            case '*': {
                 left *= primary();
                 t = ts.get();
                 break;
+            }
             case '/': {
                 double d = primary();
                 if (d == 0) std::cerr << "Can't divide by 0";
