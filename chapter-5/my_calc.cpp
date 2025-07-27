@@ -17,6 +17,42 @@
 
 #include <iostream>
 
+/*Token get_token() // read a token from cin
+{
+    char ch;
+    std::cin >> ch; // note that >> skips whitespace (space, newline, tab, etc.)
+
+    switch (ch) {
+        //not yet   case ';':    // for "print"
+        //not yet   case 'q':    // for "quit"
+        case '(':
+        case ')':
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            return Token(ch); // let each character represent itself
+        case '.':
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9': {
+            std::cin.putback(ch); // put digit back into the input stream
+            double val;
+            std::cin >> val; // read a floating-point number
+            return Token('8', val); // let '8' represent "a number"
+        }
+        default:
+            std::cerr << "Bad token";
+    }
+}*/
+
 class Token {
 public:
     char kind;
@@ -87,43 +123,6 @@ Token Token_stream::get() {
             throw std::runtime_error("Bad token");
     }
 }
-
-
-/*Token get_token() // read a token from cin
-{
-    char ch;
-    std::cin >> ch; // note that >> skips whitespace (space, newline, tab, etc.)
-
-    switch (ch) {
-        //not yet   case ';':    // for "print"
-        //not yet   case 'q':    // for "quit"
-        case '(':
-        case ')':
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            return Token(ch); // let each character represent itself
-        case '.':
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9': {
-            std::cin.putback(ch); // put digit back into the input stream
-            double val;
-            std::cin >> val; // read a floating-point number
-            return Token('8', val); // let '8' represent "a number"
-        }
-        default:
-            std::cerr << "Bad token";
-    }
-}*/
 
 Token_stream ts;
 
@@ -227,8 +226,7 @@ try {
 } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
     return 1;
-}
-catch (...) {
+} catch (...) {
     std::cerr << "Exception" << std::endl;
     return 2;
 }
