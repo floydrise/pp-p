@@ -4,8 +4,8 @@
  *
  * This program implements a basic expression calculator. Input from cin; output to cout.
  * The grammar is as below:
- *
- * Grammar:
+ **************************
+ * OG Grammar:
      * Expression:
         * Term
         * Term + Expression
@@ -19,26 +19,72 @@
      * Primary:
         * Number
         * ( Expression )
+****************************
+    * New Grammar:
+    * Calculation:
+         Statement
+         Print
+         Quit
+         Calculation Statement
+
+    * Statement:
+         Declaration
+         Expression
+    * Declaration:
+         "let" Name "=" Expression”
  */
 
 #include <iostream>
+#include <vector>
 
 constexpr char number = '8';
 constexpr char print = ';';
 constexpr char quit = 'q';
 const std::string prompt = "> ";
 const std::string result = "= ";
+constexpr char name = 'a'; // name token
+constexpr char let = 'L'; // declaration token
+const std::string declkey = "let"; // declaration keyword
+
+class Variable {
+public:
+    std::string name;
+    double value;
+};
+
+std::vector<Variable> var_table;
+
+double get_value(const std::string &str) {
+    for (const Variable &v: var_table)
+        if (v.name == str) return v.value;
+    throw std::invalid_argument("Trying to read undefined variable: " + str);
+}
+
+void set_value(const std::string &str, double val) {
+    for (Variable &table: var_table) {
+        if (table.name == str) {
+            table.value = val;
+            return;
+        }
+    }
+    throw std::invalid_argument("Trying to set undefined variable: " + str);
+}
+
 
 class Token {
 public:
     char kind;
     double value;
+    std::string name;
 
-    Token(char kind): kind(kind), value(0) {
-    };
-
-    Token(char kind, double value): kind(kind), value(value) {
-    };
+    Token() : kind{0} {
+    } // default constructor
+    Token(char ch) : kind{ch} {
+    } // initialize kind with ch
+    Token(char ch, double val) : kind{ch}, value{val} {
+    } // initialize kind and value
+    Token(char ch, std::string n) : kind{ch}, name{n} {
+    } // initialize kind and name
 };
 
 class Token_stream {
@@ -94,6 +140,7 @@ Token Token_stream::get() {
         case '/':
         case '!':
         case '%':
+        case '=':
             return Token{ch};
         case '.':
         case '0':
@@ -112,6 +159,16 @@ Token Token_stream::get() {
             return Token{number, val};
         }
         default:
+            if (isalpha(ch)) {
+                std::string s;
+                s += ch;
+                while (std::cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+                    s += ch;
+                std::cin.putback(ch);
+                if (s == declkey)
+                    return Token{let};
+                return Token{name, s};
+            }
             throw std::runtime_error("Bad token");
     }
 }
@@ -136,6 +193,8 @@ double primary() {
         case number:
             val = t.value; // return the number's value
             break;
+        case name:
+            return get_value(t.name);
         case '(': {
             val = expression();
             t = ts.get();
@@ -213,6 +272,42 @@ double expression() {
     }
 }
 
+bool is_declared(std::string var) {
+    // is var already in var_table ?
+    for (const Variable &v: var_table)
+        if (v.name == var) return true;
+
+    return false;
+}
+
+double define_name(std::string var, double val) {
+    if (is_declared(var)) throw std::invalid_argument("Variable declared twice: " + var);
+    var_table.push_back(Variable{var, val});
+    return val;
+}
+
+double declaration() {
+    Token t = ts.get();
+    if (t.kind != name) throw std::invalid_argument("name expected in declaration");
+    Token t2 = ts.get();
+    if (t2.kind != '=') throw std::invalid_argument("'=' missing in declaration");
+    double d = expression();
+    define_name(t.name, d);
+    return d;
+}
+
+double statement() {
+    Token t = ts.get();
+    switch (t.kind) {
+        case let:
+            return declaration();
+        default:
+            ts.putback(t);
+            return expression();
+    }
+};
+
+
 void clean_up_mess() {
     ts.ignore(print);
 }
@@ -228,7 +323,7 @@ void calculate() {
             if (t.kind == quit)
                 return;
             ts.putback(t);
-            std::cout << result << expression() << std::endl;
+            std::cout << result << statement() << std::endl;
         } catch (std::exception &e) {
             std::cerr << e.what() << std::endl;
             clean_up_mess();
@@ -237,6 +332,8 @@ void calculate() {
 
 int main()
 try {
+    define_name("pi", 3.1415926535);
+    define_name("e", 2.7182818284);
     calculate();
     return 0;
 } catch (std::exception &e) {
