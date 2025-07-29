@@ -34,6 +34,9 @@
          "let" Name "=" Expression”
  */
 
+
+// IMPORTANT: If you're following PP&P 3rd edition chapter 6 does NOT mention that primary() should be edited to handle the variables!
+
 #include <iostream>
 #include <valarray>
 #include <vector>
@@ -47,6 +50,7 @@ constexpr char name = 'a'; // name token
 constexpr char let = 'L'; // declaration token
 constexpr char square_root = '/'; // sqrt token
 constexpr char exponent = '^';
+const std::string quitKey = "quit";
 const std::string declkey = "let"; // declaration keyword
 const std::string sqrtkey = "sqrt"; // sqrt keyword
 const std::string powkey = "pow";
@@ -177,6 +181,8 @@ Token Token_stream::get() {
                     return Token{square_root};
                 if (s == powkey)
                     return Token{exponent};
+                if (s == quitKey)
+                    return Token{quit};
                 return Token{name, s};
             }
             throw std::runtime_error("Bad token");
