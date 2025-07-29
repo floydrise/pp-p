@@ -25,7 +25,7 @@
          Statement
          Print
          Quit
-         Calculation Statement
+         Calculation
 
     * Statement:
          Declaration
@@ -35,6 +35,7 @@
  */
 
 #include <iostream>
+#include <valarray>
 #include <vector>
 
 constexpr char number = '8';
@@ -44,7 +45,9 @@ const std::string prompt = "> ";
 const std::string result = "= ";
 constexpr char name = 'a'; // name token
 constexpr char let = 'L'; // declaration token
+constexpr char square_root = '/'; // sqrt token
 const std::string declkey = "let"; // declaration keyword
+const std::string sqrtkey = "sqrt"; // sqrt keyword
 
 class Variable {
 public:
@@ -167,6 +170,8 @@ Token Token_stream::get() {
                 std::cin.putback(ch);
                 if (s == declkey)
                     return Token{let};
+                if (s == sqrtkey)
+                    return Token{square_root};
                 return Token{name, s};
             }
             throw std::runtime_error("Bad token");
@@ -176,6 +181,15 @@ Token Token_stream::get() {
 Token_stream ts;
 
 double expression();
+
+double calc_sqrt() {
+    char ch;
+    if (std::cin.get(ch) && ch != '(') throw std::invalid_argument("'(' expected");
+    std::cin.putback(ch);
+    double d = expression();
+    if (d < 0) throw std::invalid_argument("sqrt: negative value no permitted");
+    return std::sqrt(d);
+}
 
 int factorial(int num) {
     if (num == 0) return 1;
@@ -205,6 +219,8 @@ double primary() {
             return -primary();
         case '+':
             return primary();
+        case square_root:
+            return calc_sqrt();
         default:
             std::cerr << "Primary expected";
             val = 0;
@@ -334,6 +350,7 @@ int main()
 try {
     define_name("pi", 3.1415926535);
     define_name("e", 2.7182818284);
+    define_name("k", 1000);
     calculate();
     return 0;
 } catch (std::exception &e) {
