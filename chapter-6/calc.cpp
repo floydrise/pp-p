@@ -46,8 +46,10 @@ const std::string result = "= ";
 constexpr char name = 'a'; // name token
 constexpr char let = 'L'; // declaration token
 constexpr char square_root = '/'; // sqrt token
+constexpr char exponent = '^';
 const std::string declkey = "let"; // declaration keyword
 const std::string sqrtkey = "sqrt"; // sqrt keyword
+const std::string powkey = "pow";
 
 class Variable {
 public:
@@ -144,6 +146,7 @@ Token Token_stream::get() {
         case '!':
         case '%':
         case '=':
+        case ',':
             return Token{ch};
         case '.':
         case '0':
@@ -172,6 +175,8 @@ Token Token_stream::get() {
                     return Token{let};
                 if (s == sqrtkey)
                     return Token{square_root};
+                if (s == powkey)
+                    return Token{exponent};
                 return Token{name, s};
             }
             throw std::runtime_error("Bad token");
@@ -189,6 +194,18 @@ double calc_sqrt() {
     double d = expression();
     if (d < 0) throw std::invalid_argument("sqrt: negative value no permitted");
     return std::sqrt(d);
+}
+
+double calc_pow() {
+    Token t = ts.get();
+    if (t.kind != '(') throw std::invalid_argument("'(' expected");
+    double base = expression();
+    t = ts.get();
+    if (t.kind != ',') throw std::invalid_argument("',' expected");
+    int power = static_cast<int>(expression());
+    t = ts.get();
+    if (t.kind != ')') throw std::invalid_argument("')' expected");
+    return std::pow(base, power);
 }
 
 int factorial(int num) {
@@ -219,8 +236,10 @@ double primary() {
             return -primary();
         case '+':
             return primary();
-        case square_root:
+        case square_root: // handle square root case
             return calc_sqrt();
+        case exponent:
+            return calc_pow();
         default:
             std::cerr << "Primary expected";
             val = 0;
