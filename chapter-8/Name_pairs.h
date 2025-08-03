@@ -32,4 +32,8 @@ private:
 
 std::ostream &operator<<(std::ostream &os, Name_pairs &np);
 
+bool operator==(Name_pairs &first, Name_pairs &second);
+
+bool operator!=(Name_pairs &first, Name_pairs &second);
+
 #endif //NAME_PAIRS_H

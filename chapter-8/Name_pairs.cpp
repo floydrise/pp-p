@@ -64,3 +64,22 @@ std::ostream &operator<<(std::ostream &os, Name_pairs &np) {
     return os << tmp << std::endl;
 }
 
+bool operator==(Name_pairs &first, Name_pairs &second) {
+    first.sort();
+    second.sort();
+    const auto first_names = first.get_names();
+    const auto first_ages = first.get_ages();
+    const auto second_names = second.get_names();
+    const auto second_ages = second.get_ages();
+    return first_names == second_names && first_ages == second_ages;
+}
+
+bool operator!=(Name_pairs &first, Name_pairs &second) {
+    first.sort();
+    second.sort();
+    const auto first_names = first.get_names();
+    const auto first_ages = first.get_ages();
+    const auto second_names = second.get_names();
+    const auto second_ages = second.get_ages();
+    return first_names != second_names && first_ages != second_ages;
+}
