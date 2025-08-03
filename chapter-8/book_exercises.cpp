@@ -7,15 +7,23 @@
 
 int main() try {
     Book my_book{
-        "000N", "Stefan",
+        "My new book", "Stefan", "000N",
+        std::chrono::year_month_day{std::chrono::year(2001), std::chrono::month(3), std::chrono::day(22)}
+    };
+    Book my_second_book{
+        "My new book", "Stefan", "000N",
         std::chrono::year_month_day{std::chrono::year(2001), std::chrono::month(3), std::chrono::day(22)}
     };;
+    Book diff_book{
+        "Diff Book", "John Doe", "001N",
+        std::chrono::year_month_day{std::chrono::year(2001), std::chrono::month(3), std::chrono::day(22)}
+    };
     auto author = my_book.get_author();
     auto isbn = my_book.get_ISBN();
-    std::string copyright_date = my_book.get_copyright_date();
-
-    std::cout << "Author: " << author << '\n' << "ISBN: " << isbn << '\n' << "Copyright date: " << copyright_date <<
-            std::endl;
+    auto copyright_date = my_book.get_copyright_date();
+    std::cout << my_book << std::endl;
+    if (my_book == my_second_book) std::cout << "my_book == my_new_book" << std::endl;
+    if (my_book != diff_book) std::cout << "my_book != diff_book" << std::endl;
 } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
 }
