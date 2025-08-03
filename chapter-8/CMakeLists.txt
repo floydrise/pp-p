@@ -3,4 +3,6 @@ project(chapter_8)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(chapter_8 date_struct.cpp)
+add_executable(chapter_8 date_struct.cpp
+        Book.cpp
+        book_exercises.cpp)
