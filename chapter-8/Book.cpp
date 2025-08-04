@@ -16,6 +16,10 @@ std::string Book::get_title() const {
     return title;
 }
 
+Genre Book::get_genre() const {
+    return genre;
+}
+
 
 std::string Book::get_copyright_date() const {
     return std::format("{:02}/{:02}/{:04}",
@@ -40,7 +44,32 @@ bool operator!=(const Book &first, const Book &second) {
     return first.get_ISBN() != second.get_ISBN();
 }
 
+std::ostream &operator<<(std::ostream &os, const Genre &genre) {
+    std::string val;
+    switch (genre) {
+        case Genre::fiction:
+            val = "Fiction";
+            break;
+        case Genre::biography:
+            val = "Biography";
+            break;
+        case Genre::children:
+            val = "Children";
+            break;
+        case Genre::nonfiction:
+            val = "Nonfiction";
+            break;
+        case Genre::periodical:
+            val = "Periodical";
+            break;
+        default:
+            val = "No genre";
+            break;
+    }
+    return os << val;
+}
+
 std::ostream &operator<<(std::ostream &os, const Book &book) {
-    return os << std::format("Title: {} \nAuthor: {} \nISBN: {} \n", book.get_title(), book.get_author(),
-                             book.get_ISBN());
+    return os << "Title: " << book.get_title() << '\n' << "Author: " << book.get_author() << '\n' << "Genre: " << book.
+           get_genre() << '\n' << "ISBN: " << book.get_ISBN() << std::endl;
 }
