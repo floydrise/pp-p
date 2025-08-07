@@ -1,0 +1,4 @@
+all things here are upper case
+new sentence
+this must be all
+lower case
