@@ -1,0 +1,2 @@
+-DCMAKE_PREFIX_PATH="/Users/floydrise/Qt/6.9.1/macos"
+
