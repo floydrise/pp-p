@@ -1,13 +1,13 @@
-#include "PPP/Window.h"
-#include "PPP/Graph.h"
-#include "PPP/Image_private.h"
+#include "Window.h"
+#include "Graph.h"
+#include "Image_private.h"
 #include <QApplication>
 #include <QFontMetrics>
 #include <QPainter>
 #include <QVector>
 #include <QWidget>
-#include "PPP/GUI.h"
-#include "PPP/GUI_private.h"
+#include "GUI.h"
+#include "GUI_private.h"
 
 namespace Graph_lib {
 

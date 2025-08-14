@@ -1,5 +1,5 @@
-#include "PPP/Graph.h"
-#include "PPP/Window.h"
+#include "../PPP/Graph.h"
+#include "../PPP/Window.h"
 
 int main() {
     Graph_lib::Application app;

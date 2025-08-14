@@ -1,5 +1,5 @@
-#include "PPP/Point.h"
-#include "PPP/Simple_window.h"
+#include "../PPP/Point.h"
+#include "../PPP/Simple_window.h"
 
 int main() try {
     Application app;
@@ -7,8 +7,8 @@ int main() try {
 
     const int x_size = win.x_max();
     const int y_size = win.y_max();
-    const int x_grid = 80;
-    const int y_grid = 40;
+    constexpr int x_grid = 80;
+    constexpr int y_grid = 40;
 
     Lines grid;
 

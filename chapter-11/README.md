@@ -1,0 +1,1 @@
+To test implementations, copy&paste the example you're interested in into main.cpp, compile and run

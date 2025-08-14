@@ -1,7 +1,7 @@
 #include <QApplication>
 
-#include "PPP/Point.h"
-#include "PPP/Simple_window.h"
+#include "../PPP/Point.h"
+#include "../PPP/Simple_window.h"
 
 int main() try {
     Application app;

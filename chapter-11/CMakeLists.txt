@@ -20,13 +20,13 @@ set(PROJECT_SOURCES
         PPP/Simple_window.h
         PPP/Point.h
         PPP/std_lib_facilities.h
-        Window.cpp
-        Graph.cpp
+        PPP/Window.cpp
+        PPP/Graph.cpp
         PPP/Image_private.h
-        GUI.cpp
+        PPP/GUI.cpp
         PPP/GUI_private.h
-        Simple_window.cpp
-        Colormap.cpp
+        PPP/Simple_window.cpp
+        PPP/Colormap.cpp
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)

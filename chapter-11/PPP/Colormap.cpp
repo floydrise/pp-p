@@ -1,5 +1,5 @@
 #include <QColor>
-#include <PPP/Image_private.h>
+#include "Image_private.h"
 
 static QColor paletteColorMap[] = {
     {0, 0, 0},

@@ -1,6 +1,6 @@
-#include "PPP/Graph.h"
-#include "PPP/Window.h"
-#include "PPP/Image_private.h"
+#include "Graph.h"
+#include "Window.h"
+#include "Image_private.h"
 
 
 namespace Graph_lib {
