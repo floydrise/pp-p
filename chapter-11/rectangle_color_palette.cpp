@@ -17,7 +17,6 @@ int main() {
             constexpr int size_rect = 18;
             const int x_coordinate = i * size_rect + x_offset;
             const int y_coordinate = j * size_rect + y_offset;
-
             vr.push_back(
                 make_unique<Graph_lib::Rectangle>(Graph_lib::Point{x_coordinate, y_coordinate},
                                                   size_rect,
