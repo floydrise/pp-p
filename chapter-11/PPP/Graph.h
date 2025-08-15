@@ -138,10 +138,9 @@ namespace Graph_lib {
         vector<unique_ptr<T> > owned;
 
     public:
-        Vector_ref() {
-        }
+        Vector_ref() = default;
 
-        Vector_ref(unique_ptr<T> a, unique_ptr<T> b = {}, unique_ptr<T> c = {}, unique_ptr<T> d = {}) {
+        explicit Vector_ref(unique_ptr<T> a, unique_ptr<T> b = {}, unique_ptr<T> c = {}, unique_ptr<T> d = {}) {
             if (a) push_back(std::move(a));
             if (b) push_back(std::move(b));
             if (c) push_back(std::move(c));
@@ -161,7 +160,7 @@ namespace Graph_lib {
 
         T &operator[](int i) { return *v[i]; }
         const T &operator[](int i) const { return *v[i]; }
-        int size() const { return (int) v.size(); }
+        [[nodiscard]] int size() const { return static_cast<int>(v.size()); }
         auto begin() { return v.begin(); }
         auto end() { return v.end(); }
         auto begin() const { return v.begin(); }
