@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
         PPP/Point.h
         PPP/std_lib_facilities.h
         PPP/Arrow.h
+        PPP/Box.h
         PPP/Arrow.cpp
         PPP/Window.cpp
         PPP/Graph.cpp
