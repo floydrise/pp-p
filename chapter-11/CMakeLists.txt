@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
         PPP/Simple_window.h
         PPP/Point.h
         PPP/std_lib_facilities.h
+        PPP/Arrow.h
+        PPP/Arrow.cpp
         PPP/Window.cpp
         PPP/Graph.cpp
         PPP/Image_private.h
