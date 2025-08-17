@@ -291,6 +291,48 @@ namespace Graph_lib {
         int height() const { return h; }
         int width() const { return w; }
 
+        Point north_west() const {
+            return point(0);
+        }
+
+        Point north_east() {
+            Point main_pnt = north_west();
+            return {main_pnt.x + width(), main_pnt.y};
+        }
+
+
+        Point north() const {
+            Point main_pnt = north_west();
+            const int half = width() / 2;
+            return {main_pnt.x + half, main_pnt.y};
+        }
+
+        Point south_west() const {
+            Point main_pnt = north_west();
+            return {main_pnt.x, main_pnt.y + height()};
+        }
+
+        Point south_east() {
+            Point main_pnt = north_east();
+            return {main_pnt.x, main_pnt.y + height()};
+        }
+
+        Point south() {
+            Point main_pnt = north();
+            return {main_pnt.x, main_pnt.y + height()};
+        }
+
+        Point west() {
+            Point main_pnt = north_west();
+            return {main_pnt.x, main_pnt.y + height() / 2};
+        }
+
+        Point east() {
+            Point main_pnt = north_east();
+            return {main_pnt.x, main_pnt.y + height() / 2};
+        }
+
+
         void set_style(Line_style::Line_style_type sty, int i);
 
     private:

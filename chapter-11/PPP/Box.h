@@ -7,12 +7,14 @@
 #include "Graph.h"
 
 
-class Box : public Graph_lib::Shape {
-public:
+struct Box : Graph_lib::Shape {
+    Graph_lib::Rectangle rect;
+    Graph_lib::Text label;
+
     Box(const Graph_lib::Point xy, const int ww, int hh, std::string str): rect(xy, ww, hh),
                                                                            label(Graph_lib::Point{
                                                                                    xy.x + 10,
-                                                                                   xy.y + rect.height() / 2
+                                                                                   xy.y + 10
                                                                                },
                                                                                str) {
     }
@@ -21,10 +23,6 @@ public:
         rect.draw_specifics(painter);
         label.draw_specifics(painter);
     };
-
-private:
-    Graph_lib::Rectangle rect;
-    Graph_lib::Text label;
 };
 
 
