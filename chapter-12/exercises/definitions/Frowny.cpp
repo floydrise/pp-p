@@ -2,7 +2,7 @@
 // Created by Stefan Petrov on 20.08.25.
 //
 
-#include "../Frowny.h"
+#include "Frowny.h"
 
 #include "PPP/Window.h"
 

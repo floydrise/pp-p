@@ -37,6 +37,8 @@ set(PROJECT_SOURCES
         exercises/definitions/Frowny.h
         exercises/definitions/Immobile_circle.h
         exercises/definitions/Immobile_circle.cpp
+        exercises/definitions/Striped_rectangle.h
+        exercises/definitions/Striped_rectangle.cpp
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)

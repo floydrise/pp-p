@@ -1,14 +1,11 @@
-#include "exercises/definitions/Frowny.h"
-#include "exercises/definitions/Immobile_circle.h"
-#include "exercises/definitions/Smiley.h"
+#include "exercises/definitions/Striped_rectangle.h"
 #include "PPP/Point.h"
 #include "PPP/Window.h"
 
 int main() {
     Graph_lib::Application app;
     Graph_lib::Window win{Graph_lib::Point{100, 100}, 600, 400, "Test"};
-    Immobile_circle imb_cl{Graph_lib::Point{100, 100}, 50};
-    // imb_cl.move(); -> this won't work, move() is private and overridden to do nothing
-    win.attach(imb_cl);
+    Striped_rectangle str_rec{Graph_lib::Point{100, 100}, 200, 50};
+    win.attach(str_rec);
     app.gui_main();
 }

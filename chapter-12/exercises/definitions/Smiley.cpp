@@ -1,4 +1,4 @@
-#include "../Smiley.h"
+#include "Smiley.h"
 
 #include "PPP/Window.h"
 

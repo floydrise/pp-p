@@ -295,7 +295,7 @@ namespace Graph_lib {
             return point(0);
         }
 
-        Point north_east() {
+        Point north_east() const {
             Point main_pnt = north_west();
             return {main_pnt.x + width(), main_pnt.y};
         }
@@ -312,22 +312,22 @@ namespace Graph_lib {
             return {main_pnt.x, main_pnt.y + height()};
         }
 
-        Point south_east() {
+        Point south_east() const {
             Point main_pnt = north_east();
             return {main_pnt.x, main_pnt.y + height()};
         }
 
-        Point south() {
+        Point south() const {
             Point main_pnt = north();
             return {main_pnt.x, main_pnt.y + height()};
         }
 
-        Point west() {
+        Point west() const {
             Point main_pnt = north_west();
             return {main_pnt.x, main_pnt.y + height() / 2};
         }
 
-        Point east() {
+        Point east() const {
             Point main_pnt = north_east();
             return {main_pnt.x, main_pnt.y + height() / 2};
         }
