@@ -31,10 +31,12 @@ set(PROJECT_SOURCES
         PPP/Simple_window.cpp
         PPP/Colormap.cpp
         exercises/drill/B1.cpp
-        exercises/Smiley.h
-        exercises/Smiley.cpp
-        exercises/Frowny.cpp
-        exercises/Frowny.h
+        exercises/definitions/Smiley.h
+        exercises/definitions/Smiley.cpp
+        exercises/definitions/Frowny.cpp
+        exercises/definitions/Frowny.h
+        exercises/definitions/Immobile_circle.h
+        exercises/definitions/Immobile_circle.cpp
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
