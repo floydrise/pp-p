@@ -5,6 +5,7 @@
 
 #include "PPP/Point.h"
 #include "Graph.h"
+#include "exercises/definitions/Octagon.h"
 
 namespace Graph_lib {
     class Shape; // "forward declare" Shape

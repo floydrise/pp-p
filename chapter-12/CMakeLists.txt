@@ -41,6 +41,8 @@ set(PROJECT_SOURCES
         exercises/definitions/Striped_rectangle.cpp
         exercises/definitions/Striped_circle.h
         exercises/definitions/Striped_circle.cpp
+        exercises/definitions/Octagon.h
+        exercises/definitions/Octagon.cpp
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
