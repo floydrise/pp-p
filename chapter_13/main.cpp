@@ -66,7 +66,7 @@ int main() {
     Open_polyline adults;
     Open_polyline aged;
 
-    Simple_window win{Point{100, 100}, xmax, ymax, "Three fns"};
+    Simple_window win{Point{100, 100}, xmax, ymax, "Aging Japan"};
 
 
     Axis x{
