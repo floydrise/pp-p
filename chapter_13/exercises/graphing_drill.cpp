@@ -1,12 +1,9 @@
-#include <complex>
-#include <valarray>
-
 #include "PPP/Simple_window.h"
 #include "PPP/Window.h"
 
 double one(double) { return 1; }
 double slope(const double x) { return 0.5 * x; }
-double square(double x) { return x * x; }
+double square(const double x) { return x * x; }
 double sloping_cos(const double x) { return cos(x) + slope(x); };
 
 int main() {
