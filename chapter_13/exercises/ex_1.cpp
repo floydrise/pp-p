@@ -1,3 +1,5 @@
+// using C++23 -> std::print() instead of std::cout
+
 #include <iostream>
 int fac_recursive(const int x) { return x > 1 ? x * fac_recursive(x - 1) : 1; };
 
@@ -13,6 +15,6 @@ int fac_iterative(int x) {
 int main() {
     int recursive = fac_recursive(4);
     int iterative = fac_iterative(4);
-    std::cout << std::format("Iterative: {}\nIterative: {}\n", iterative, recursive);
+    std::print("Iterative: {}\nIterative: {}\n", iterative, recursive);
     return 0;
 };
