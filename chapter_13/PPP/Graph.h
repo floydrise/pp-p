@@ -188,6 +188,11 @@ namespace Graph_lib {
             redraw();
         }
 
+        void clear() {
+            points.clear();
+            redraw();
+        }
+
     public:
         void draw(Painter &painter) const; // deal with color and draw_lines
     private:

@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
         PPP/GUI_private.h
         PPP/Simple_window.cpp
         PPP/Colormap.cpp
+        classes/Fct.h
+        classes/Fct.cpp
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
