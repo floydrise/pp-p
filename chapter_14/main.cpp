@@ -1,3 +1,4 @@
+#include "classes/Color_window.h"
 #include "classes/Lines_window.h"
 #include "PPP/Window.h"
 
@@ -8,7 +9,8 @@ int main()
 try {
     Application app; // create a GUI application
     Lines_window win{app, Point{100, 100}, 600, 400, "lines"}; // our window
-    return app.gui_main();
+    Color_window color_win{app, Point{100, 100}, 600, 400, "Color menu"};
+    app.gui_main();
 } catch (exception &e) {
     cerr << "exception: " << e.what() << '\n';
     return 1;

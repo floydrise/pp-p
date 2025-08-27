@@ -32,6 +32,8 @@ set(PROJECT_SOURCES
         PPP/Colormap.cpp
         classes/Lines_window.h
         classes/Lines_window.cpp
+        classes/Color_window.cpp
+        classes/Color_window.h
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
