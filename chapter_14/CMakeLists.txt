@@ -34,6 +34,8 @@ set(PROJECT_SOURCES
         classes/Lines_window.cpp
         classes/Color_window.cpp
         classes/Color_window.h
+        classes/My_window.cpp
+        classes/My_window.h
 )
 
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
