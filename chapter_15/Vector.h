@@ -10,9 +10,11 @@ class Vector {
 public:
     explicit Vector(int s);
 
-    ~Vector();
+    ~Vector() { delete[] elem; };
 
     int size() const { return sz; };
+    int get(const int n) const { return elem[n]; };
+    void set(const int n, const int v) const { elem[n] = v; };
 
 private:
     int sz = 0;

@@ -9,7 +9,3 @@ Vector::Vector(const int s): sz(s), elem(new double[s]) {
         elem[i] = 0;
     }
 }
-
-Vector::~Vector() {
-    delete[] elem;
-}
