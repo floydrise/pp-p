@@ -7,13 +7,16 @@
 
 
 class Vector {
+public:
+    explicit Vector(int s);
+
+    ~Vector();
+
+    int size() const { return sz; };
+
+private:
     int sz = 0;
     double *elem = nullptr;
-
-public:
-    Vector(int s): sz(s) {
-    };
-    int size() { return sz; };
 };
 
 
