@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "Linked_list.h"
+#include "../classes/Linked_list.h"
 
-void print_all(Linked_list *p) {
+void print_all(const Linked_list *p) {
     std::cout << "{ ";
     while (p) {
         std::cout << p->value;

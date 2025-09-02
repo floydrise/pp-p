@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Link.h"
+#include "../classes/Link.h"
 
 void print_all(Link *p) {
     std::cout << "{ ";

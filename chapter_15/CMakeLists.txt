@@ -4,6 +4,8 @@ project(chapter_15)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(chapter_15 main.cpp
-        Link.h
-        Link.cpp
-        Linked_list.cpp)
+        classes/Link.h
+        classes/Link.cpp
+        classes/Linked_list.cpp
+        classes/Vector.cpp
+        classes/Vector.h)

@@ -2,7 +2,7 @@
 // Created by Stefan Petrov on 2.09.25.
 //
 
-#include "Linked_list.h"
+#include "./Linked_list.h"
 
 Linked_list *Linked_list::insert(Linked_list *n) // insert n before p; return n
 {
