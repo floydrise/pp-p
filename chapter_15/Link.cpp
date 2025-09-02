@@ -38,13 +38,15 @@ Link *advance(Link *ptr, int n) {
         --n;
         if (ptr->next)
             ptr = ptr->next;
-        return nullptr;
+        else
+            return nullptr;
     }
     while (n < 0) {
         ++n;
         if (ptr->prev)
             ptr = ptr->prev;
-        return nullptr;
+        else
+            return nullptr;
     }
     return ptr;
 }

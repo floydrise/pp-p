@@ -1,40 +1,41 @@
 #include <iostream>
 
-#include "Link.h"
+#include "Linked_list.h"
 
-void print_all(Link *p) {
+void print_all(Linked_list *p) {
     std::cout << "{ ";
     while (p) {
         std::cout << p->value;
-        if ((p = p->next))
+        if ((p = p->next()))
             std::cout << ", ";
     }
     std::cout << " }";
 }
 
 int main() {
-    Link *norse_gods = new Link{"Thor"};
-    norse_gods = insert(norse_gods, new Link{"Odin"});
-    norse_gods = insert(norse_gods, new Link{"Zeus"});
-    norse_gods = insert(norse_gods, new Link{"Freja"});
+    auto *norse_gods = new Linked_list{"Thor"};
+    norse_gods = norse_gods->insert(new Linked_list{"Odin"});
+    norse_gods = norse_gods->insert(new Linked_list{"Zeus"});
+    norse_gods = norse_gods->insert(new Linked_list{"Freja"});
 
-    Link *greek_gods = new Link{"Hera"};
-    greek_gods = insert(greek_gods, new Link{"Athena"});
-    greek_gods = insert(greek_gods, new Link{"Mars"});
-    greek_gods = insert(greek_gods, new Link{"Poseidon"});
+    auto *greek_gods = new Linked_list{"Hera"};
+    greek_gods = greek_gods->insert(new Linked_list{"Athena"});
+    greek_gods = greek_gods->insert(new Linked_list{"Mars"});
+    greek_gods = greek_gods->insert(new Linked_list{"Poseidon"});
 
-    Link *p = find(greek_gods, "Mars");
+
+    Linked_list *p = greek_gods->find("Mars");
     if (p) {
         p->value = "Ares";
     }
 
-    p = find(norse_gods, "Zeus");
-    if (p) {
-        if (p == norse_gods) {
-            norse_gods = p->next;
+    Linked_list *p2 = norse_gods->find("Zeus");
+    if (p2) {
+        if (p2 == norse_gods) {
+            norse_gods = p2->next();
         }
-        erase(p);
-        greek_gods = insert(greek_gods, p);
+        p2->erase();
+        greek_gods = greek_gods->insert(p2);
     }
 
     print_all(norse_gods);
