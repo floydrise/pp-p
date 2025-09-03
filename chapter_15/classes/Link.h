@@ -20,7 +20,7 @@ struct Link {
 
 Link *insert(Link *old_p, Link *new_p);
 
-Link *erase(const Link *ptr); // remove ptr from list, return ptr->next
+Link *erase(Link *ptr); // remove ptr from list, return ptr->next
 
 Link *find(Link *ptr, const std::string &str); // find str in list, return nullptr for "not found"
 

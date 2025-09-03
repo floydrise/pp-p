@@ -13,7 +13,7 @@ Link *insert(Link *old_p, Link *new_p) {
     return new_p;
 }
 
-Link *erase(const Link *ptr) {
+Link *erase(Link *ptr) {
     if (ptr == nullptr) return nullptr;
     if (ptr->next) {
         ptr->next->prev = ptr->prev;

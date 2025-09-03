@@ -12,6 +12,14 @@ void print_all(Link *p) {
     std::cout << " }";
 }
 
+void delete_links(Link *head) {
+    while (head) {
+        Link *next = head->next;
+        delete head;
+        head = next;
+    }
+}
+
 int main() {
     Link *norse_gods = new Link{"Thor"};
     norse_gods = insert(norse_gods, new Link{"Odin"});
@@ -42,4 +50,7 @@ int main() {
 
     print_all(greek_gods);
     std::cout << '\n';
+
+    delete_links(norse_gods);
+    delete_links(greek_gods);
 }
