@@ -4,11 +4,13 @@
 
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <initializer_list>
 
 
 class Vector {
 public:
     explicit Vector(int s);
+    Vector(std::initializer_list<double>lst);
 
     ~Vector() { delete[] elem; };
 
