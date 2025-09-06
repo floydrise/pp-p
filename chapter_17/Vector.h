@@ -9,16 +9,27 @@
 
 class Vector {
 public:
-    explicit Vector(int s);
-    Vector(std::initializer_list<double>lst);
+    explicit Vector(int s); // constructor
 
-    ~Vector() { delete[] elem; };
+    Vector(std::initializer_list<double> lst); // list initialisation
+
+    Vector(const Vector &); // copy constructor
+
+    Vector &operator=(const Vector &); // copy assignment
+
+    Vector(Vector &&) noexcept; // move constructor
+
+    Vector &operator=(Vector &&) noexcept; // move assignment
+
+    ~Vector() { delete[] elem; }; // move destructor
 
     [[nodiscard]] int size() const { return sz; };
-    [[nodiscard]] double get(const int n) const { return elem[n]; };
-    void set(const int n, const int v) const { elem[n] = v; };
     double &operator[](const int n) { return elem[n]; };
     const double &operator[](const int n) const { return elem[n]; };
+
+    // not needed now we have operator[]
+    [[nodiscard]] double get(const int n) const { return elem[n]; };
+    void set(const int n, const int v) const { elem[n] = v; };
 
 private:
     int sz = 0;
